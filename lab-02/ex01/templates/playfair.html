@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Playfair Cipher Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body { background-color: #f8f9fa; }
+    .card { border-radius: 0.75rem; }
+    .card-header { font-weight: 600; }
+    .form-inline .form-group { flex: 1; }
+    pre { white-space: pre-wrap; word-wrap: break-word; }
+  </style>
+</head>
+<body class="pt-5">
+  <div class="container">
+    <h1 class="text-center mb-5">Playfair Cipher</h1>
+
+    <div class="row">
+      <!-- Matrix Builder -->
+      <div class="col-lg-5 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-info text-white">1. Build 5×5 Matrix</div>
+          <div class="card-body">
+            <form method="post" action="/playfair/creatematrix" class="form-inline">
+              <div class="form-group mr-2 mb-2 flex-fill">
+                <label for="matrixKey" class="sr-only">Key</label>
+                <input
+                  id="matrixKey"
+                  name="key"
+                  class="form-control w-100"
+                  placeholder="Enter key"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-info mb-2">Build</button>
+            </form>
+            {% if mode == "Matrix" %}
+              <h5 class="mt-4">Matrix Preview:</h5>
+              <table class="table table-bordered text-center mx-auto w-auto">
+                {% for row in result %}
+                  <tr>
+                    {% for cell in row %}
+                      <td class="align-middle">{{ cell }}</td>
+                    {% endfor %}
+                  </tr>
+                {% endfor %}
+              </table>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Encrypt / Decrypt -->
+      <div class="col-lg-7 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">2. Encrypt / Decrypt</div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <form method="post" action="/playfair/encrypt" class="p-3 border rounded">
+                  <h6 class="mb-3 text-primary">Encrypt</h6>
+                  <div class="form-group">
+                    <label for="encryptText" class="sr-only">Plain Text</label>
+                    <textarea
+                      id="encryptText"
+                      name="text"
+                      class="form-control"
+                      rows="3"
+                      placeholder="Enter plain text"
+                      required
+                    >{{ request.form.text if mode=='Encrypted' else '' }}</textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="encryptKey" class="sr-only">Key</label>
+                    <input
+                      type="text"
+                      id="encryptKey"
+                      name="key"
+                      class="form-control"
+                      placeholder="Enter key"
+                      value="{{ request.form.key if mode=='Encrypted' else '' }}"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block">Encrypt</button>
+                </form>
+              </div>
+              <div class="col-md-6 mb-3">
+                <form method="post" action="/playfair/decrypt" class="p-3 border rounded">
+                  <h6 class="mb-3 text-success">Decrypt</h6>
+                  <div class="form-group">
+                    <label for="decryptText" class="sr-only">Cipher Text</label>
+                    <textarea
+                      id="decryptText"
+                      name="text"
+                      class="form-control"
+                      rows="3"
+                      placeholder="Enter cipher text"
+                      required
+                    >{{ request.form.text if mode=='Decrypted' else '' }}</textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="decryptKey" class="sr-only">Key</label>
+                    <input
+                      type="text"
+                      id="decryptKey"
+                      name="key"
+                      class="form-control"
+                      placeholder="Enter key"
+                      value="{{ request.form.key if mode=='Decrypted' else '' }}"
+                      required
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-success btn-block">Decrypt</button>
+                </form>
+              </div>
+            </div>
+
+            {% if mode in ["Encrypted","Decrypted"] %}
+              <div class="mt-4">
+                <h5>{{ mode }} Text:</h5>
+                <pre class="p-3 bg-light border">{{ result }}</pre>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="/" class="btn btn-link">← Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>
