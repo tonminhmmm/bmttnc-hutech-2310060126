@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui version="4.0">
+ <class>ECCDialog</class>
+ <widget class="QDialog" name="ECCDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x><y>0</y><width>500</width><height>380</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ECC Cipher</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing"><number>20</number></property>
+   <item>
+    <!-- Title ở trên cùng -->
+    <widget class="QLabel" name="lblTitle">
+     <property name="text">
+      <string>ECC CIPHER</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>18</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="margin">
+      <number>10</number>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <!-- Nút Generate Keys canh phải -->
+    <layout class="QHBoxLayout" name="genKeysLayout">
+     <item>
+      <spacer name="hSpacer" orientation="Qt::Horizontal">
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width><height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_gen_keys">
+       <property name="text">
+        <string>Generate Keys</string>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>120</width><height>30</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <!-- Phần Information và Signature đặt trong một Grid -->
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="horizontalSpacing"><number>20</number></property>
+     <property name="verticalSpacing"><number>15</number></property>
+     <property name="columnStretch">
+      <item>
+       <column>1</column><stretch>1</stretch>
+      </item>
+     </property>
+     <!-- Label Information -->
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblInfo">
+       <property name="text"><string>Information:</string></property>
+      </widget>
+     </item>
+     <!-- TextEdit Information -->
+     <item row="0" column="1">
+      <widget class="QTextEdit" name="txt_info">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+     <!-- Label Signature -->
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblSign">
+       <property name="text"><string>Signature:</string></property>
+      </widget>
+     </item>
+     <!-- TextEdit Signature -->
+     <item row="1" column="1">
+      <widget class="QTextEdit" name="txt_sign">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <!-- Các nút Sign/Verify căn giữa -->
+    <layout class="QHBoxLayout" name="buttonsLayout">
+     <property name="spacing"><number>30</number></property>
+     <item><spacer name="hSpacerLeft" orientation="Qt::Horizontal"/></item>
+     <item>
+      <widget class="QPushButton" name="btn_sign">
+       <property name="text"><string>Sign</string></property>
+       <property name="minimumSize"><size><width>100</width><height>30</height></size></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_verify">
+       <property name="text"><string>Verify</string></property>
+       <property name="minimumSize"><size><width>100</width><height>30</height></size></property>
+      </widget>
+     </item>
+     <item><spacer name="hSpacerRight" orientation="Qt::Horizontal"/></item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
